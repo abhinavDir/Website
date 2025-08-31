@@ -1,0 +1,194 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .card-body {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .card-footer a,
+  .card-footer button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    text-decoration: none;
+  }
+
+  .card-footer a {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .card-footer a:hover {
+    background-color: #0056b3;
+  }
+
+  .card-footer button {
+    background-color: #dc3545;
+    color: white;
+    cursor: pointer;
+    border: none;
+  }
+
+  .card-footer button:hover {
+    background-color: #b52a37;
+  }
+
+  .card-footer button:focus {
+    outline: none;
+  }
+ 
+
+h1, h2 {
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+form input, form textarea, form select, form button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.review {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.stars {
+  color: #f39c12;
+}
+
+</style>
+
+<div class="card">
+ 
+  <% if (listing.image) { %>
+    <img src="<%= listing.image.url %>" alt="Listing Image" />
+  <% } %>
+
+</div>
+
+  <div class="card-header">
+    <%= listing.title %>
+  </div>
+
+  
+  
+  <div class="card-body">
+    <br/>
+
+
+  <p><strong>Price:</strong> ₹ <%= listing.price.toLocaleString("en-IN") %></p>
+  <p><strong>Location:</strong> <%= listing.location %></p>
+  <p><strong>Country:</strong> <%= listing.country %></p>
+ </div>
+
+<% if (currUser&& listing.owner._id.equals(currUser._id)){ %>
+  <div class="card-footer">
+    <a href="/listings/<%= listing._id %>/edit">✏️ Edit this Listing</a>
+
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+      <button type="submit">🗑️ Delete this Listing</button>
+    </form>
+  </div>
+<% }%> 
+  
+<% if(currUser){ %>
+<div class="container">
+  <h1>Submit a Review</h1>
+  <form action="/listings/review/<%= listing._id %>" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+    
+    <select name="rating" required>
+      <option value="">Select Rating</option>
+      <option value="5">★★★★★ - Excellent</option>
+      <option value="4">★★★★☆ - Very Good</option>
+      <option value="3">★★★☆☆ - Good</option>
+      <option value="2">★★☆☆☆ - Fair</option>
+      <option value="1">★☆☆☆☆ - Poor</option>
+    </select>
+
+    <textarea name="comment" rows="4" placeholder="Your Comment" required></textarea>
+    
+    <button type="submit">Submit Review</button>
+  </form>
+</div>
+
+<div class="container">
+  <h2>Recent Reviews</h2>
+
+  <div class="review">
+    <strong>Priya</strong><br>
+    <span class="stars">★★★★★</span><br>
+    <p>Great service! Highly recommended.</p>
+  </div>
+
+  <div class="review">
+    <strong>Rahul</strong><br>
+    <span class="stars">★★★☆☆</span><br>
+    <p>It was okay. Could be improved.</p>
+  </div>
+
+  <div class="review">
+    <strong>Neha</strong><br>
+    <span class="stars">★★★★☆</span><br>
+    <p>Good experience overall!</p>
+  </div>
+</div>
+</div>
+<% } %>

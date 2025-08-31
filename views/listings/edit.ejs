@@ -1,0 +1,153 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  .form-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  h3 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  button {
+    padding: 0.8rem 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="form-container">
+  <h3>Edit Your Listing</h3>
+  <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+    
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input 
+        id="title" 
+        name="listing[title]" 
+        type="text" 
+        value="<%= listing.title %>" 
+        required 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea 
+        id="description" 
+        name="listing[description]" 
+        required
+      ><%= listing.description %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input 
+        id="image" 
+        name="listing[image][url]" 
+        type="text" 
+        value="<%= listing.image?.url || '' %>" 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price ($)</label>
+      <input 
+        id="price" 
+        name="listing[price]" 
+        type="number" 
+        min="0" 
+        value="<%= listing.price %>" 
+        required 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input 
+        id="country" 
+        name="listing[country]" 
+        type="text" 
+        value="<%= listing.country %>" 
+        required 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input 
+        id="location" 
+        name="listing[location]" 
+        type="text" 
+        value="<%= listing.location %>" 
+        required 
+      />
+    </div>
+
+    <button type="submit">Save Changes</button>
+  </form>
+</div>

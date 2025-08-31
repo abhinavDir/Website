@@ -1,0 +1,95 @@
+<style>
+  /* General Navbar Styles */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40;
+    padding: 1rem;
+    color: white;
+  }
+
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+
+  .navbar-links ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+
+  .navbar-links li {
+    margin-right: 1rem;
+  }
+
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  .navbar-links a:hover {
+    text-decoration: underline;
+  }
+
+  /* Search Bar Styles */
+  #search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #search-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    width: 250px;
+  }
+
+  #search-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #search-btn:hover {
+    background-color: #2980b9;
+  }
+
+  #search-btn i {
+    font-size: 1.2rem;
+  }
+</style>
+
+
+ <nav class="navbar">
+  <a class="navbar-brand" href="/">commerce</a>
+   <div id="search-bar">
+   
+    <input type="text" id="search-input" placeholder="Search listings..." />
+    <button id="search-btn">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </div>
+  <div class="navbar-links">
+    <ul>
+      <li><a href="/listings">Home</a></li>
+      <li><a href="listings/about">About</a></li>
+      <li><a href="/listings/new">New</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <li><a href="/user/signup">Signup</a></li>
+      <li><a href="/user/login">Login</a></li>
+    </ul>
+  </div>
+  
+  </nav>
